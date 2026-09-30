@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Super Intelligence Cat ($SIC)</title>
+  <meta name="description" content="Super Intelligence Cat is too smart for the timeline, outplaying humans and turning every meme into pure chaos. $SIC on Solana.">
+  <meta name="theme-color" content="#08101F">
+  <link rel="icon" href="logo.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@500;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            night: "#08101F",
+            cape: "#E2231A",
+            suit: "#1F4FD8",
+            shield: "#F6C945",
+            fur: "#F08A3E",
+            cream: "#FFF6E8",
+            ink: "#0A0A0A"
+          },
+          fontFamily: {
+            display: ["Bangers", "cursive"],
+            body: ["Nunito", "sans-serif"]
+          },
+          boxShadow: {
+            comic: "8px 8px 0 #0A0A0A",
+            cape: "6px 6px 0 #F6C945",
+            suit: "6px 6px 0 #E2231A"
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Nunito", sans-serif;
+      color: #FFF6E8;
+      background: #08101F;
+    }
+    ::selection { background: #F6C945; color: #0A0A0A; }
+
+    .comic-title {
+      font-family: "Bangers", cursive;
+      letter-spacing: 0.04em;
+      line-height: 0.9;
+      color: #F6C945;
+      -webkit-text-stroke: 6px #0A0A0A;
+      paint-order: stroke fill;
+      text-shadow: 6px 6px 0 #E2231A;
+    }
+    .comic-title-sm {
+      font-family: "Bangers", cursive;
+      letter-spacing: 0.03em;
+      color: #F6C945;
+      -webkit-text-stroke: 4px #0A0A0A;
+      paint-order: stroke fill;
+      text-shadow: 4px 4px 0 #1F4FD8;
+    }
+    .panel {
+      background: rgba(8, 16, 31, 0.82);
+      border: 4px solid #0A0A0A;
+      box-shadow: 8px 8px 0 #E2231A;
+    }
+    .panel-blue { box-shadow: 8px 8px 0 #1F4FD8; }
+    .panel-gold { box-shadow: 8px 8px 0 #F6C945; }
+    .panel-fur { box-shadow: 8px 8px 0 #F08A3E; }
+
+    .btn {
+      font-family: "Bangers", cursive;
+      letter-spacing: 0.06em;
+      border: 3px solid #0A0A0A;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .btn:hover { transform: translate(-2px, -2px); }
+    .btn:active { transform: translate(3px, 3px); box-shadow: 0 0 0 #0A0A0A !important; }
+    .btn-buy {
+      background: linear-gradient(180deg, #ff4d3a 0%, #c8102e 100%);
+      color: #fff;
+      box-shadow: 6px 6px 0 #F6C945;
+    }
+    .btn-buy:hover { box-shadow: 8px 8px 0 #F6C945; }
+    .btn-chart {
+      background: linear-gradient(180deg, #3b82f6 0%, #1d4ed8 100%);
+      color: #fff;
+      box-shadow: 6px 6px 0 #E2231A;
+    }
+    .btn-chart:hover { box-shadow: 8px 8px 0 #E2231A; }
+    .btn-copy {
+      background: #F6C945;
+      color: #0A0A0A;
+      box-shadow: 4px 4px 0 #1F4FD8;
+    }
+    .btn-copy:hover { box-shadow: 6px 6px 0 #1F4FD8; }
+
+    .shield {
+      background: #F6C945;
+      color: #E2231A;
+      clip-path: polygon(50% 0%, 93% 20%, 80% 78%, 50% 100%, 20% 78%, 7% 20%);
+      filter: drop-shadow(3px 3px 0 #0A0A0A);
+    }
+
+    @keyframes floaty {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    .floaty { animation: floaty 4.5s ease-in-out infinite; }
+
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+    .ticker-track { animation: ticker 28s linear infinite; }
+    .ticker:hover .ticker-track { animation-play-state: paused; }
+
+    .step-badge {
+      font-family: "Bangers", cursive;
+      background: #F6C945;
+      color: #E2231A;
+      border: 3px solid #0A0A0A;
+      box-shadow: 3px 3px 0 #0A0A0A;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .floaty, .ticker-track { animation: none !important; }
+    }
+  </style>
+</head>
+<body class="font-body antialiased">
+  <div class="pointer-events-none fixed inset-0 -z-10" aria-hidden="true">
+    <img src="banner.jpg" alt="" class="h-full w-full object-cover object-center">
+    <div class="absolute inset-0 bg-gradient-to-b from-night/35 via-night/55 to-night/88"></div>
+  </div>
+
+  <header class="sticky top-0 z-50 border-b-4 border-ink bg-night/75 backdrop-blur-md">
+    <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
+      <a href="#top" class="flex items-center gap-3">
+        <img src="logo.png" alt="Super Intelligence Cat logo" class="h-12 w-12 rounded-xl border-2 border-ink object-cover shadow-cape">
+        <span class="font-display text-2xl tracking-wide text-shield leading-none">SIC</span>
+      </a>
+
+      <nav class="hidden items-center gap-7 text-sm font-extrabold uppercase tracking-wider md:flex" aria-label="Primary">
+        <a href="#lore" class="text-cream transition hover:text-shield">Lore</a>
+        <a href="#buy" class="text-cream transition hover:text-shield">How to Buy</a>
+        <a href="#chart" class="text-cream transition hover:text-shield">Chart</a>
+      </nav>
+
+      <div class="flex items-center gap-2 sm:gap-3">
+        <a href="https://t.me/sicatsol_portal" target="_blank" rel="noopener noreferrer" aria-label="Telegram" class="transition hover:-translate-y-0.5">
+          <img src="tg.png" alt="" class="h-10 w-10 rounded-full border-2 border-ink object-cover">
+        </a>
+        <a href="https://x.com/sicatsol" target="_blank" rel="noopener noreferrer" aria-label="X" class="transition hover:-translate-y-0.5">
+          <img src="x.png" alt="" class="h-10 w-10 rounded-lg border-2 border-ink bg-black object-cover">
+        </a>
+        <a href="https://swap.pump.fun/?input=So11111111111111111111111111111111111111112&output=TBA" target="_blank" rel="noopener noreferrer" class="btn btn-buy hidden px-4 py-2 text-xl sm:inline-block">Buy Now</a>
+        <button type="button" id="menu-btn" class="btn btn-chart px-3 py-2 text-lg md:hidden" aria-expanded="false" aria-controls="mobile-menu">Menu</button>
+      </div>
+    </div>
+    <div id="mobile-menu" class="hidden border-t-4 border-ink bg-night/95 px-4 py-4 md:hidden">
+      <div class="flex flex-col gap-3 font-extrabold uppercase tracking-wider">
+        <a href="#lore" class="mobile-link rounded-lg px-2 py-2 hover:bg-white/10">Lore</a>
+        <a href="#buy" class="mobile-link rounded-lg px-2 py-2 hover:bg-white/10">How to Buy</a>
+        <a href="#chart" class="mobile-link rounded-lg px-2 py-2 hover:bg-white/10">Chart</a>
+        <a href="https://swap.pump.fun/?input=So11111111111111111111111111111111111111112&output=TBA" target="_blank" rel="noopener noreferrer" class="btn btn-buy px-4 py-2 text-center text-xl">Buy Now</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="relative px-4 pb-16 pt-12 sm:pt-16">
+      <div class="mx-auto flex max-w-3xl flex-col items-center text-center">
+        <img src="logo.png" alt="Super Intelligence Cat" class="floaty mb-6 h-44 w-44 rounded-3xl border-4 border-ink object-cover shadow-[10px_10px_0_#E2231A] sm:h-56 sm:w-56">
+
+        <p class="mb-3 inline-flex items-center gap-2 rounded-full border-2 border-ink bg-night/80 px-4 py-1 text-xs font-extrabold uppercase tracking-[0.22em] text-shield">
+          <span class="h-2 w-2 rounded-full bg-cape"></span>
+          Solana · $SIC
+        </p>
+
+        <h1 class="comic-title text-5xl sm:text-7xl md:text-8xl">
+          Super<br>Intelligence<br>Cat
+        </h1>
+
+        <div class="mt-6 flex items-center gap-3">
+          <span class="shield grid h-14 w-12 place-items-center font-display text-3xl">S</span>
+          <p class="font-display text-4xl tracking-wide text-cream sm:text-5xl">$SIC</p>
+        </div>
+
+        <p class="panel panel-gold mt-8 max-w-2xl px-5 py-4 text-base font-extrabold leading-relaxed text-cream sm:text-lg">
+          Super Intelligence Cat is too smart for the timeline, outplaying humans and turning every meme into pure chaos.
+        </p>
+
+        <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+          <a href="https://swap.pump.fun/?input=So11111111111111111111111111111111111111112&output=TBA" target="_blank" rel="noopener noreferrer" class="btn btn-buy px-8 py-3 text-2xl">Buy Now</a>
+          <a href="https://dexscreener.com/solana/TBA" target="_blank" rel="noopener noreferrer" class="btn btn-chart px-8 py-3 text-2xl">Chart</a>
+        </div>
+
+        <div class="panel panel-blue mt-8 flex w-full max-w-xl flex-col items-stretch gap-3 p-3 sm:flex-row sm:items-center">
+          <div class="min-w-0 flex-1 px-2 text-left">
+            <p class="text-[11px] font-extrabold uppercase tracking-[0.2em] text-shield">Contract Address</p>
+            <p id="ca-display" class="truncate font-mono text-lg font-bold text-cream">TBA</p>
+          </div>
+          <button type="button" class="copy-ca btn btn-copy px-5 py-2 text-xl" data-label="Copy CA">Copy CA</button>
+        </div>
+
+        <div class="mt-6 flex items-center gap-4">
+          <a href="https://t.me/sicatsol_portal" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 font-extrabold text-cream transition hover:text-shield">
+            <img src="tg.png" alt="" class="h-9 w-9 rounded-full border-2 border-ink">
+            Telegram
+          </a>
+          <a href="https://x.com/sicatsol" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 font-extrabold text-cream transition hover:text-shield">
+            <img src="x.png" alt="" class="h-9 w-9 rounded-lg border-2 border-ink bg-black object-cover">
+            X
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <div class="ticker overflow-hidden border-y-4 border-ink bg-shield text-ink">
+      <div class="ticker-track flex w-max py-2 font-display text-2xl tracking-wide">
+        <p class="px-4">SUPER INTELLIGENCE CAT · $SIC · TOO SMART FOR THE TIMELINE · OUTPLAYING HUMANS · PURE CHAOS · SOLANA ·&nbsp;</p>
+        <p class="px-4" aria-hidden="true">SUPER INTELLIGENCE CAT · $SIC · TOO SMART FOR THE TIMELINE · OUTPLAYING HUMANS · PURE CHAOS · SOLANA ·&nbsp;</p>
+      </div>
+    </div>
+
+    <section id="lore" class="px-4 py-20">
+      <div class="mx-auto max-w-6xl">
+        <p class="mb-2 text-center text-xs font-extrabold uppercase tracking-[0.28em] text-fur">Issue 001 · Feline Division</p>
+        <h2 class="comic-title-sm mb-10 text-center text-5xl sm:text-6xl">Too Smart</h2>
+
+        <div class="grid gap-6 lg:grid-cols-5">
+          <article class="panel panel-gold p-6 sm:p-8 lg:col-span-3">
+            <p class="font-display text-3xl leading-snug text-shield sm:text-4xl">
+              The timeline blinked. The cat did not.
+            </p>
+            <p class="mt-5 text-lg font-bold leading-relaxed text-cream/95">
+              Super Intelligence Cat is too smart for the timeline, outplaying humans and turning every meme into pure chaos. While everyone else refreshes the feed, $SIC has already read the next three candles, the next three jokes, and the exit.
+            </p>
+            <p class="mt-4 text-lg font-bold leading-relaxed text-cream/90">
+              Cape on. Shield up. Brain several cities ahead. This is not a mascot. This is the supercat who treats Solana like a rooftop and the market like a punchline.
+            </p>
+          </article>
+
+          <div class="grid gap-4 sm:grid-cols-3 lg:col-span-2 lg:grid-cols-1">
+            <article class="panel panel-blue p-5">
+              <p class="text-xs font-extrabold uppercase tracking-widest text-shield">Codename</p>
+              <p class="font-display text-3xl text-cream">$SIC</p>
+              <p class="mt-1 text-sm font-bold text-cream/80">Super Intelligence Cat</p>
+            </article>
+            <article class="panel p-5">
+              <p class="text-xs font-extrabold uppercase tracking-widest text-shield">Chain</p>
+              <p class="font-display text-3xl text-cream">Solana</p>
+              <p class="mt-1 text-sm font-bold text-cream/80">Fast enough to stay ahead of humans</p>
+            </article>
+            <article class="panel panel-fur p-5">
+              <p class="text-xs font-extrabold uppercase tracking-widest text-shield">Specialty</p>
+              <p class="font-display text-3xl leading-none text-cream">Pure Chaos</p>
+              <p class="mt-1 text-sm font-bold text-cream/80">Every meme, already outplayed</p>
+            </article>
+          </div>
+        </div>
+
+        <div class="mt-6 grid gap-4 md:grid-cols-3">
+          <article class="panel panel-blue p-6">
+            <p class="font-display text-5xl text-shield">01</p>
+            <h3 class="mt-1 font-display text-2xl text-cream">Outplays Humans</h3>
+            <p class="mt-2 font-bold text-cream/85">The cat saw the trade, the joke, and the reply before the timeline typed the first letter.</p>
+          </article>
+          <article class="panel panel-gold p-6">
+            <p class="font-display text-5xl text-cape">02</p>
+            <h3 class="mt-1 font-display text-2xl text-cream">Too Smart</h3>
+            <p class="mt-2 font-bold text-cream/85">Super Intelligence Cat does not follow the timeline. The timeline tries to catch up and fails.</p>
+          </article>
+          <article class="panel p-6">
+            <p class="font-display text-5xl text-fur">03</p>
+            <h3 class="mt-1 font-display text-2xl text-cream">Meme Chaos</h3>
+            <p class="mt-2 font-bold text-cream/85">Hand $SIC a meme and it comes back louder, faster, and slightly dangerous. Pure chaos, on purpose.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="buy" class="px-4 py-16">
+      <div class="mx-auto max-w-6xl">
+        <p class="mb-2 text-center text-xs font-extrabold uppercase tracking-[0.28em] text-fur">Solana field manual</p>
+        <h2 class="comic-title mb-4 text-center text-5xl sm:text-7xl">How to Buy</h2>
+        <p class="mx-auto mb-10 max-w-2xl text-center text-lg font-extrabold text-cream">
+          Four steps. One cape. Swap SOL for $SIC and join the cat who is already too smart for the timeline.
+        </p>
+
+        <ol class="grid gap-6 md:grid-cols-2">
+          <li class="panel panel-gold p-6">
+            <div class="flex items-center gap-4">
+              <span class="step-badge grid h-14 w-14 shrink-0 place-items-center text-3xl">1</span>
+              <h3 class="font-display text-3xl text-shield">Get a Solana Wallet</h3>
+            </div>
+            <p class="mt-4 text-lg font-bold leading-relaxed text-cream/90">
+              Install Phantom or Solflare. Super Intelligence Cat lives on Solana, and the chaos starts in a wallet you control.
+            </p>
+          </li>
+          <li class="panel panel-blue p-6">
+            <div class="flex items-center gap-4">
+              <span class="step-badge grid h-14 w-14 shrink-0 place-items-center text-3xl">2</span>
+              <h3 class="font-display text-3xl text-shield">Fund It with SOL</h3>
+            </div>
+            <p class="mt-4 text-lg font-bold leading-relaxed text-cream/90">
+              Buy SOL and send it to your wallet. Keep a little extra for network fees. Even a genius cat pays for the rooftop landing.
+            </p>
+          </li>
+          <li class="panel p-6">
+            <div class="flex items-center gap-4">
+              <span class="step-badge grid h-14 w-14 shrink-0 place-items-center text-3xl">3</span>
+              <h3 class="font-display text-3xl text-shield">Copy the $SIC CA</h3>
+            </div>
+            <p class="mt-4 text-lg font-bold leading-relaxed text-cream/90">
+              Copy the contract address below. Paste it into the swap so you buy the real Super Intelligence Cat, the one turning every meme into pure chaos.
+            </p>
+          </li>
+          <li class="panel panel-fur p-6">
+            <div class="flex items-center gap-4">
+              <span class="step-badge grid h-14 w-14 shrink-0 place-items-center text-3xl">4</span>
+              <h3 class="font-display text-3xl text-shield">Swap SOL for $SIC</h3>
+            </div>
+            <p class="mt-4 text-lg font-bold leading-relaxed text-cream/90">
+              Hit Buy Now, trade SOL for $SIC, and confirm in your wallet. You just outplayed the humans still staring at the timeline.
+            </p>
+          </li>
+        </ol>
+
+        <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+          <a href="https://swap.pump.fun/?input=So11111111111111111111111111111111111111112&output=TBA" target="_blank" rel="noopener noreferrer" class="btn btn-buy px-8 py-3 text-2xl">Buy Now</a>
+          <a href="https://dexscreener.com/solana/TBA" target="_blank" rel="noopener noreferrer" class="btn btn-chart px-8 py-3 text-2xl">Chart</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="chart" class="px-4 py-16 pb-24">
+      <div class="mx-auto max-w-6xl">
+        <p class="mb-2 text-center text-xs font-extrabold uppercase tracking-[0.28em] text-fur">Live tape</p>
+        <h2 class="comic-title-sm mb-4 text-center text-5xl sm:text-6xl">The Chart</h2>
+        <p class="mx-auto mb-8 max-w-2xl text-center text-lg font-extrabold text-cream">
+          Watch $SIC print chaos in real time. The cat is too smart for the timeline — the candles are just trying to keep up.
+        </p>
+
+        <div class="panel panel-blue overflow-hidden">
+          <div class="flex items-center justify-between gap-3 border-b-4 border-ink bg-suit px-4 py-3">
+            <p class="font-display text-2xl tracking-wide text-cream">Dexscreener · $SIC</p>
+            <a href="https://dexscreener.com/solana/TBA" target="_blank" rel="noopener noreferrer" class="text-sm font-extrabold uppercase tracking-wider text-shield hover:underline">Open chart</a>
+          </div>
+          <iframe
+            title="Super Intelligence Cat Dexscreener chart"
+            src="https://dexscreener.com/solana/TBA?embed=1&theme=dark&trades=0&info=0"
+            class="h-[420px] w-full bg-night sm:h-[560px]"
+            loading="lazy"
+          ></iframe>
+        </div>
+
+        <div class="panel panel-gold mt-6 flex flex-col gap-4 p-4 sm:flex-row sm:items-center sm:justify-between">
+          <div class="min-w-0">
+            <p class="text-[11px] font-extrabold uppercase tracking-[0.2em] text-shield">Contract Address</p>
+            <p class="truncate font-mono text-xl font-bold text-cream">TBA</p>
+          </div>
+          <div class="flex flex-wrap gap-3">
+            <button type="button" class="copy-ca btn btn-copy px-5 py-2 text-xl" data-label="Copy CA">Copy CA</button>
+            <a href="https://dexscreener.com/solana/TBA" target="_blank" rel="noopener noreferrer" class="btn btn-chart px-5 py-2 text-xl">Chart</a>
+            <a href="https://swap.pump.fun/?input=So11111111111111111111111111111111111111112&output=TBA" target="_blank" rel="noopener noreferrer" class="btn btn-buy px-5 py-2 text-xl">Buy Now</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t-4 border-ink bg-night/90">
+    <div class="mx-auto flex max-w-6xl flex-col items-center gap-5 px-4 py-10 text-center">
+      <img src="logo.png" alt="" class="h-16 w-16 rounded-2xl border-2 border-ink object-cover">
+      <div>
+        <p class="font-display text-3xl text-shield">Super Intelligence Cat</p>
+        <p class="mt-1 max-w-xl font-bold text-cream/80">
+          Super Intelligence Cat is too smart for the timeline, outplaying humans and turning every meme into pure chaos.
+        </p>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="https://t.me/sicatsol_portal" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
+          <img src="tg.png" alt="" class="h-11 w-11 rounded-full border-2 border-ink">
+        </a>
+        <a href="https://x.com/sicatsol" target="_blank" rel="noopener noreferrer" aria-label="X">
+          <img src="x.png" alt="" class="h-11 w-11 rounded-lg border-2 border-ink bg-black object-cover">
+        </a>
+      </div>
+      <p class="text-xs font-bold uppercase tracking-widest text-cream/50">$SIC · Solana · Meme chaos, not financial advice</p>
+    </div>
+  </footer>
+
+  <div id="toast" class="pointer-events-none fixed bottom-5 left-1/2 z-50 -translate-x-1/2 translate-y-6 rounded-full border-2 border-ink bg-shield px-5 py-2 font-display text-xl tracking-wide text-ink opacity-0 transition" role="status" aria-live="polite">
+    CA copied
+  </div>
+
+  <script>
+    const CA = "TBA";
+
+    document.querySelectorAll(".copy-ca").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(CA);
+        } catch (err) {
+          const area = document.createElement("textarea");
+          area.value = CA;
+          area.setAttribute("readonly", "");
+          area.style.position = "fixed";
+          area.style.left = "-9999px";
+          document.body.appendChild(area);
+          area.select();
+          document.execCommand("copy");
+          area.remove();
+        }
+        const label = btn.dataset.label || "Copy CA";
+        btn.textContent = "Copied!";
+        const toast = document.getElementById("toast");
+        toast.classList.remove("opacity-0", "translate-y-6");
+        clearTimeout(btn._timer);
+        btn._timer = setTimeout(() => {
+          btn.textContent = label;
+          toast.classList.add("opacity-0", "translate-y-6");
+        }, 1400);
+      });
+    });
+
+    const menuBtn = document.getElementById("menu-btn");
+    const menu = document.getElementById("mobile-menu");
+    menuBtn.addEventListener("click", () => {
+      const open = menu.classList.toggle("hidden") === false;
+      menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+      menuBtn.textContent = open ? "Close" : "Menu";
+    });
+    document.querySelectorAll(".mobile-link").forEach((link) => {
+      link.addEventListener("click", () => {
+        menu.classList.add("hidden");
+        menuBtn.setAttribute("aria-expanded", "false");
+        menuBtn.textContent = "Menu";
+      });
+    });
+  </script>
+</body>
+</html>
